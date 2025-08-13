@@ -9,7 +9,8 @@ deepl_translator = deepl.Translator(DEEPL_API_KEY)
 CHARACTER_LIMIT = 500_000
 character_count = 0
 
-INPUT_XLSX = "spotify_songs_with_regions_and_gender.xlsx"
+#INPUT_XLSX = "spotify_songs_with_regions_and_gender.xlsx"
+INPUT_XLSX = "translated_lyrics.xlsx"
 OUTPUT_XLSX = "translated_lyrics.xlsx"
 
 # Charger le fichier Excel
@@ -29,7 +30,7 @@ for idx, row in df.iterrows():
 
     try:
         time.sleep(0.3)  # Pour éviter de surcharger l'API
-        result = deepl_translator.translate_text(lyrics, target_lang="EN-US", source_lang=original_lang.upper())
+        result = deepl_translator.translate_text(lyrics, target_lang="EN-US")
         translation = result.text
         character_count += len(lyrics)
         df.at[idx, "english_lyrics"] = translation
